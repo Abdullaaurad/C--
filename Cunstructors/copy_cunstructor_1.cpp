@@ -11,12 +11,7 @@ public:
         cout << "Inside the constructor" << endl;
     }
 
-    Complex operator-(Complex& c) {
-        Complex temp;
-        temp.real = real - c.real;
-        temp.imagi = imagi - c.imagi;
-        return temp;
-    }
+    friend Complex operator-(const Complex& c1, const Complex& c2);
 
     Complex operator+(Complex& c) {
         Complex temp;
@@ -46,6 +41,13 @@ public:
         cout << "Deallocate Memory" << endl;
     }
 };
+
+Complex operator-(const Complex& c1, const Complex& c2) {
+    Complex temp;
+    temp.real = c1.real - c2.real;
+    temp.imagi = c1.imagi - c2.imagi;
+    return temp;
+}
 
 int main() {
     Complex C1(3, 4);

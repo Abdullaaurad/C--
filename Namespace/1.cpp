@@ -16,6 +16,10 @@ namespace second_space{
 
 using namespace second_space;
 int main(){
-    func()   // ?To call the func() inside second_space
+    func();   // ?To call the func() inside second_space
     first_space::func();    // ?To call the func() inside first_space
+
+    cout << "Hi" << endl;
+    first_space::func();
+    second_space::func();
 }

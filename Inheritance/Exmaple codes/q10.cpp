@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class A
-{
+class A{
     int x;
 
 public:
@@ -10,8 +9,7 @@ public:
     void print() { cout << x; }
 };
 
-class B : public A
-{
+class B : public A{
 public:
     B()
     {
@@ -19,8 +17,7 @@ public:
     }
 };
 
-class C : public A
-{
+class C : public A{
 public:
     C()
     {
@@ -28,8 +25,12 @@ public:
     }
 };
 
-class D : public B, public C
-{
+class D : public B, public C{
+public:
+    D()
+    {
+        B::setx(60);
+    }  
 };
 
 int main(){

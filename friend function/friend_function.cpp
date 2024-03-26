@@ -1,9 +1,6 @@
 #include<iostream>
 using namespace std;
 
-class triangle;
-void print(triangle);
-
 class triangle {
     float a;
     float circumference;

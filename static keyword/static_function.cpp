@@ -15,7 +15,7 @@ public:
         std::cout << "\nThis is a static function." << std::endl;
         std::cout << "Value of static x=" << x << std::endl;
         // std::cout << "Value of int y="<< y << std::endl;
-        // we cant access a non static variable from a static function
+        //! we can't access a non static variable from a static function
     }
 };
 

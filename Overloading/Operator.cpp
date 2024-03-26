@@ -15,9 +15,8 @@ public:
         return value;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const SimpleNumber& num) {
-        os << num.value;
-        return os;
+    friend std::ostream& operator<<(std::ostream& ol, const SimpleNumber& num) {    //? can use any name for ostream like ol,out anything but you have to be consistent
+        ol << num.value;
     }
 };
 

@@ -5,7 +5,7 @@ using namespace::std;
 
 class Flyable {
 public:
-    virtual void fly()=0;                  //reduces error when the same function have different implementation in derived calsses or sub classes
+    virtual void fly(int)=0;                  //reduces error when the same function have different implementation in derived calsses or sub classes
 };                                 //Changes to the base class interface can be propagated to derived classes, reducing potential errors.
 
 class Swimmable {
@@ -20,8 +20,8 @@ class Amphibious : public Flyable, public Swimmable {
 // Concrete class inheriting from Amphibious
 class Duck : public Amphibious {
 public:
-    void fly(){
-        std::cout << "Duck can fly" << std::endl;
+    void fly(int k){
+        std::cout << "Duck can fly " << k << std::endl;
     }
 
     void swim() override {                            //this override doesn't do anything other than telling the user this functions is overridden
@@ -39,7 +39,7 @@ public:
 int main() {
     Duck duck;
     Fish Nemo;
-    duck.fly();  // Output: Duck is flying!
+    duck.fly(5);  // Output: Duck is flying!
     duck.swim(); // Output: Duck is swimming!
     Nemo.swim();
 }

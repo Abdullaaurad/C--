@@ -1,5 +1,7 @@
 #include <iostream>
 
+using namespace std;
+
 class Temperature {
 private:
     double celsius;
@@ -8,6 +10,7 @@ public:
     Temperature(double celsiusValue) : celsius(celsiusValue) {}
 
     operator double(){
+        cout << "hi" << endl;
         return (celsius * 9.0 / 5.0) + 32.0;
     }
 
@@ -16,7 +19,7 @@ public:
     }
 
     void displayFahrenheit(){
-        std::cout << "Temperature in Fahrenheit: " << static_cast<double>(*this) << " °F" << std::endl;
+        std::cout << "Temperature in Fahrenheit: " << double(*this) << " °F" << std::endl;
     }
 };
 

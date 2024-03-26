@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{listings} % For code listing
+\usepackage{xcolor} % For syntax highlighting
+\usepackage{geometry} % For adjusting margins
+\usepackage{titling} % For adjusting title
+\usepackage{sectsty} % For section font styling
+\usepackage{enumitem} % For adjusting list item spacing
+
+% Define custom colors
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.4}
+
+% Set code listing style
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    breaklines=true,
+    showstringspaces=false,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny
+    \color{gray},
+}
+
+% Adjust margins
+\geometry{margin=1in}
+
+% Adjust title formatting
+\pretitle{\begin{center}\LARGE\bfseries}
+\posttitle{\par\end{center}\vskip 0.5em}
+
+% Section font styling
+\sectionfont{\color{darkblue}}
+
+% Adjust list item spacing
+\setlist{nosep}
+
+\title{Differences Between Normal and Static Functions in C++}
+\author{S.A. Abdulla}
+\date{21/01/2024}
+
+\begin{document}
+\maketitle
+
+\newpage
+\section*{Introduction}
+In C++, you can't directly catch a variable like \texttt{catch(k)}. 
+When catching exceptions, you need to specify the type of the exception being caught;
+you can't use only the variable name to catch.
+\newline
+For example, if you want to catch an exception of type \texttt{int},
+you would typically catch it by reference:
+
+\begin{lstlisting}[language=C++, caption=Example of catching an int exception]
+int k;
+try {
+    // code that may throw an int
+} catch (int &k) {
+    // handle the exception
+}
+\end{lstlisting}
+
+In C++, a \texttt{throw} statement can only throw one exception object at a time. Each \texttt{throw} statement typically throws one instance of a particular exception type.
+
+\section*{Custom Exception Handling}
+\begin{lstlisting}[language=C++, caption=Example of custom exception handling]
+#include <iostream>
+using namespace std;
+
+class CustomException {
+public:
+    int errorCode;
+    string errorMessage;
+
+    CustomException(int code, const string& message) : errorCode(code), errorMessage(message) {}
+};
+
+void foo() {
+    throw CustomException(404, "Not Found");
+}
+
+int main() {
+    try {
+        foo();
+    }
+    catch(const CustomException& e) {
+        cout << "Error Code: " << e.errorCode << endl;
+        cout << "Error Message: " << e.errorMessage << endl;
+    }
+    return 0;
+}
+\end{lstlisting}
+\newpage
+
+\section*{Handling Multiple Exceptions}
+If you want to handle multiple exceptions, it has to be done separately. If we use \texttt{throw} one after another without catching, only one of the \texttt{catch} blocks will execute.
+
+\begin{lstlisting}[language=C++, caption=Example of handling multiple exceptions]
+    #include <iostream>
+
+    using namespace std;
+    
+    // Define the Exception class
+    class MyException {
+    public:
+        int value;
+        bool isPtrException;
+    
+        MyException(int val, bool isPtr) : value(val), isPtrException(isPtr) {}
+    };
+    
+    // Define the fun function
+    void fun(int* ptr, int val) {
+        if (ptr == nullptr) {
+            throw MyException(val, true);
+        } else {
+            throw MyException(val, false);
+        }
+    }
+    
+    int main() {
+        int y = 0;
+        try {
+            fun(nullptr, y); // Throws MyException with isPtrException=true
+        } catch (MyException &e) {
+            if (e.isPtrException) {
+                cout << "Caught exception from ptr value: " << e.value << endl;
+            } else {
+                cout << "Caught exception from val value: " << e.value << endl;
+            }
+        }
+    
+        try {
+            int x = 0;
+            fun(&x, y); // Throws MyException with isPtrException=false
+        } catch (MyException &k) {
+            if (k.isPtrException) {
+                cout << "Caught exception from ptr value: " << k.value << endl;
+            } else {
+                cout << "Caught exception from val value: " << k.value << endl;
+            }
+        }
+    
+        return 0;
+    }
+    
+\end{lstlisting}
+
+\end{document}

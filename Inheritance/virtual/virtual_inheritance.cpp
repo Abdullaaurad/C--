@@ -24,8 +24,8 @@ public:
 
 int main(){
     D q;
-    q.C::a=10;
-    q.B::a=100;
+    q.B::a=10;
+    q.C::a=100;
     q.b=20;
     q.c=30;
     q.d=40;

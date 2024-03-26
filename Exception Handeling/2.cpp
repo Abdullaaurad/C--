@@ -8,7 +8,7 @@ void fun(int *ptr, int x) {
     if (x == 0){
         throw x; 
     }
-} 
+}
 
 int main() {
     int y = 0;
